@@ -3,22 +3,22 @@ import javax.security.auth.login.LoginException;
 import java.io.*;
 import java.util.*;
 
-public class Admin_Manager
-{
+public class Admin_Manager {
     List<Admin> adminList;
-    public List<User>userList;
-    List<Candidate>candidateList;
-    List<User>voatingcandidateList;
-    public Admin_Manager()
-    {
+    public List<User> userList;
+    List<Candidate> candidateList;
+    List<User> voatingcandidateList;
+
+    public Admin_Manager() {
         adminList = new ArrayList<>();
         userList = new ArrayList<>();
         candidateList = new ArrayList<>();
         voatingcandidateList = new ArrayList<>();
     }
+
     Scanner sc = new Scanner(System.in);
-    public void LogIn(String filepath)
-    {
+
+    public void LogIn(String filepath) {
         System.out.println("enter id ");
         int admin_id = sc.nextInt();
         sc.nextLine();
@@ -26,57 +26,58 @@ public class Admin_Manager
         String admin_name = sc.nextLine();
         System.out.println("enter Password");
         int admin_password = sc.nextInt();
-        Admin newadmin = new Admin(admin_id ,admin_name ,admin_password);
+        Admin newadmin = new Admin(admin_id, admin_name, admin_password);
         adminList.add(newadmin);
         writeToCSVadmin(filepath);
         System.out.println("admin added successfully !");
     }
-    public void writeToCSVadmin(String filePath) {
-    try (FileWriter writer = new FileWriter(filePath, true)) { // Append mode
-        //write admin data
-        if (adminList.isEmpty()) {
-            System.out.println("No admin data to write to CSV.");
-            return;
-        }
-        for (Admin admin : adminList) {
-            writer.append(String.valueOf(admin.getAdmin_id())).append(",");
-            writer.append(admin.getAdmin_name()).append(",");
-            writer.append(String.valueOf(admin.getAdmin_password())).append("\n");
-        }
-        System.out.println("Data entered successfully !");
-    } catch (IOException e) {
-        System.out.println("An error occurred while writing to the CSV file: " + e.getMessage());
-        e.printStackTrace(); // Print the stack trace for debugging
-    }
-}
-public void displayAdmin()
-{
-    for(Admin admin : adminList)
-    {
-        System.out.println(admin);
-        //adminList.add(admin);
-    }
-}
-public void addUsers(String filepath)
-{
-    System.out.println("enter user id");
-    String userId = sc.nextLine();
-    sc.nextLine();
-    System.out.println("enter user name");
-    String username = sc.nextLine();
-    System.out.println("enter user age");
-    int userage = sc.nextInt();
-    sc.nextLine();
-    System.out.println("enter user phonenumber");
-    String userphonenumber = sc.nextLine();
-    System.out.println("enter user password");
-    String userPassword = sc.nextLine();
-    User newusers = new User(userId,username,userage,userphonenumber,userPassword);
-    userList.add(newusers);
-    writeToCSVuser(filepath);
-    System.out.println("user added successfully ! ");
 
-}
+    public void writeToCSVadmin(String filePath) {
+        try (FileWriter writer = new FileWriter(filePath, true)) { // Append mode
+            //write admin data
+            if (adminList.isEmpty()) {
+                System.out.println("No admin data to write to CSV.");
+                return;
+            }
+            for (Admin admin : adminList) {
+                writer.append(String.valueOf(admin.getAdmin_id())).append(",");
+                writer.append(admin.getAdmin_name()).append(",");
+                writer.append(String.valueOf(admin.getAdmin_password())).append("\n");
+            }
+            System.out.println("Data entered successfully !");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the CSV file: " + e.getMessage());
+            e.printStackTrace(); // Print the stack trace for debugging
+        }
+    }
+
+    public void displayAdmin() {
+        for (Admin admin : adminList) {
+            System.out.println(admin);
+            //adminList.add(admin);
+        }
+    }
+
+    public void addUsers(String filepath) {
+        System.out.println("enter user id");
+        String userId = sc.nextLine();
+        sc.nextLine();
+        System.out.println("enter user name");
+        String username = sc.nextLine();
+        System.out.println("enter user age");
+        int userage = sc.nextInt();
+        sc.nextLine();
+        System.out.println("enter user phonenumber");
+        String userphonenumber = sc.nextLine();
+        System.out.println("enter user password");
+        String userPassword = sc.nextLine();
+        User newusers = new User(userId, username, userage, userphonenumber, userPassword);
+        userList.add(newusers);
+        writeToCSVuser(filepath);
+        System.out.println("user added successfully ! ");
+
+    }
+
     public void writeToCSVuser(String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) { // Append mode
             //write admin data
@@ -97,18 +98,17 @@ public void addUsers(String filepath)
             e.printStackTrace(); // Print the stack trace for debugging
         }
     }
-public void displayUser()
-{
-    for(User users : userList)
-    {
-        System.out.println(users);
-    }
-}
 
-    public void LogOut()
-    {
+    public void displayUser() {
+        for (User users : userList) {
+            System.out.println(users);
+        }
+    }
+
+    public void LogOut() {
         System.out.println("log out successfully !! ");
     }
+
     public void changePassword(String filePath, String adminId) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath));
              BufferedWriter writer = new BufferedWriter(new FileWriter("result.csv"))) {
@@ -134,8 +134,8 @@ public void displayUser()
         oldFile.delete();
         newFile.renameTo(oldFile);
     }
-    public void addCandidate(String filepath)
-    {
+
+    public void addCandidate(String filepath) {
         System.out.println("enter candidate id :");
         String candidate_id = sc.nextLine();
         System.out.println("enter candidate name :");
@@ -147,12 +147,13 @@ public void displayUser()
         sc.nextLine();
         System.out.println("enter candidate password :");
         String candidate_password = sc.nextLine();
-        Candidate newcandidate = new Candidate(candidate_id,candidate_name,candidate_symbol,candidate_age,candidate_password );
+        Candidate newcandidate = new Candidate(candidate_id, candidate_name, candidate_symbol, candidate_age, candidate_password);
         candidateList.add(newcandidate);
         writeToCSVcandidate(filepath);
         System.out.println("candidate added successfully : ");
 
     }
+
     public void writeToCSVcandidate(String filePath) {
         try (FileWriter writer = new FileWriter(filePath, true)) { // Append mode
             //write admin data
@@ -173,8 +174,8 @@ public void displayUser()
             e.printStackTrace(); // Print the stack trace for debugging
         }
     }
-    public void deleteCandidate()
-    {
+
+    public void deleteCandidate() {
         System.out.println("enter candidate id :");
         String candidate_id = sc.nextLine();
         System.out.println("enter candidate name :");
@@ -182,23 +183,22 @@ public void displayUser()
         System.out.println("enter candidate password :");
         String candidate_pass = sc.nextLine();
         Candidate candidateToDelete = null;
-        for(Candidate candidate : candidateList){
-            if(candidate_id.equals(candidate.getCandidate_id()) && candidate_pass.equals(candidate.getCandidate_password())){
+        for (Candidate candidate : candidateList) {
+            if (candidate_id.equals(candidate.getCandidate_id()) && candidate_pass.equals(candidate.getCandidate_password())) {
                 candidateToDelete = candidate;
                 break;
             }
         }
-        if(candidateToDelete!=null){
-         candidateList.remove(candidateToDelete);
+        if (candidateToDelete != null) {
+            candidateList.remove(candidateToDelete);
             System.out.println("candidate deleted successfully");
-        }
-        else{
+        } else {
             System.out.println("candidate not found . please try again with correct id and password.");
         }
     }
-    public void display_Candidate_Info()
-    {
-        for(Candidate candidate:candidateList){
+
+    public void display_Candidate_Info() {
+        for (Candidate candidate : candidateList) {
             System.out.println(candidate);
         }
     }
@@ -264,8 +264,7 @@ public void displayUser()
         }
     }
 
-    public void delete_voting_Candidate()
-    {
+    public void delete_voting_Candidate() {
         System.out.println("enter user id :");
         String user_id = sc.nextLine();
         System.out.println("enter user age :");
@@ -273,22 +272,21 @@ public void displayUser()
         System.out.println("enter user password :");
         String user_pass = sc.nextLine();
         User VotingcandidateToDelete = null;
-        for(User candidate : voatingcandidateList){
-            if(user_id.equals(candidate.getUser_id()) && user_pass.equals(candidate.getUser_password())){
+        for (User candidate : voatingcandidateList) {
+            if (user_id.equals(candidate.getUser_id()) && user_pass.equals(candidate.getUser_password())) {
                 VotingcandidateToDelete = candidate;
                 break;
             }
         }
-        if(VotingcandidateToDelete!=null){
+        if (VotingcandidateToDelete != null) {
             voatingcandidateList.remove(VotingcandidateToDelete);
             System.out.println(" Voting candidate deleted successfully");
-        }
-        else{
+        } else {
             System.out.println(" Voting candidate not found . please try again with correct id and password.");
         }
     }
-    public void edit_voting_Candidate()
-    {
+
+    public void edit_voting_Candidate() {
         System.out.println("Enter user ID to edit:");
         String userID = sc.nextLine();
 
@@ -426,61 +424,111 @@ public void displayUser()
     }
 
 
- public void calculate_winner() {
-     Map<String, Integer> votesCount = new HashMap<>();
+    public void calculate_winner() {
+        Map<String, Integer> votesCount = new HashMap<>();
 
-     // Count the votes for each candidate
-     for (User candidate : voatingcandidateList) {
-         String candidateId = candidate.getUser_id();
-         votesCount.put(candidateId, votesCount.getOrDefault(candidateId, 0) + 1);
-     }
+        // Count the votes for each candidate
+        for (User candidate : voatingcandidateList) {
+            String candidateId = candidate.getUser_id();
+            votesCount.put(candidateId, votesCount.getOrDefault(candidateId, 0) + 1);
+        }
 
-     // Find the candidate with the highest number of votes
-     int maxVotes = 0;
-     String winningCandidateId = null;
-     for (Map.Entry<String, Integer> entry : votesCount.entrySet()) {
-         if (entry.getValue() > maxVotes) {
-             maxVotes = entry.getValue();
-             winningCandidateId = entry.getKey();
-         }
-     }
-
-     // Get the winning candidate object
-     Candidate winner = getCandidateByID(winningCandidateId);
-
-     if (winner != null) {
-         System.out.println("The winner is: " + winner.getCandidate_name() + " with " + maxVotes + " votes.");
-     } else {
-         System.out.println("No winner found.");
-     }
- }
-
-    private Candidate getCandidateByID(String candidateId) {
-        for (Candidate candidate : candidateList) {
-            if (candidate.getCandidate_id().equals(candidateId)) {
-                return candidate;
+        // Find the candidate with the highest number of votes
+        int maxVotes = 0;
+        String winningCandidateId = null;
+        for (Map.Entry<String, Integer> entry : votesCount.entrySet()) {
+            if (entry.getValue() > maxVotes) {
+                maxVotes = entry.getValue();
+                winningCandidateId = entry.getKey();
             }
         }
-        return null;
- }
 
-    public void updateResult(String resultFilePath, String newResult) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(resultFilePath, true))) {
-            writer.write(newResult);
-            writer.newLine();
-            System.out.println("Result updated successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Get the winning candidate object
+        Candidate winner = getCandidateByID(winningCandidateId);
+
+        if (winner != null) {
+            System.out.println("The winner is: " + winner.getCandidate_name() + " with " + maxVotes + " votes.");
+        } else {
+            System.out.println("No winner found.");
         }
     }
-    public void viewResult(String resultFilePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(resultFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+
+//     Candidate getCandidateByID(String candidateId) {
+//         for (Candidate candidate : candidateList) {
+//             if (candidate.getCandidate_id().equals(candidateId)) {
+//                 return candidate;
+//             }
+//         }
+//         return null;
+//     }
+
+    public void calculateWinner() {
+        Map<String, Integer> votesCount = new HashMap<>();
+
+        // Count the votes for each candidate
+        for (User votingUser : voatingcandidateList) {
+            String candidateId = votingUser.getUser_id();
+            votesCount.put(candidateId, votesCount.getOrDefault(candidateId, 0) + 1);
+        }
+
+        // Find the candidate(s) with the highest number of votes
+        int maxVotes = 0;
+        List<String> winningCandidates = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : votesCount.entrySet()) {
+            int votes = entry.getValue();
+            if (votes > maxVotes) {
+                maxVotes = votes;
+                winningCandidates.clear();
+                winningCandidates.add(entry.getKey());
+            } else if (votes == maxVotes) {
+                // In case of a tie, add the candidate to the list of winners
+                winningCandidates.add(entry.getKey());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+
+        // Check if there's at least one winner
+        if (!winningCandidates.isEmpty()) {
+            // Display the winner(s)
+            System.out.print("Winner(s): ");
+            for (String candidateId : winningCandidates) {
+                Candidate winner = getCandidateByID(candidateId);
+                if (winner != null) {
+                    System.out.print(winner.getCandidate_name() + ", ");
+                }
+            }
+            System.out.println("with " + maxVotes + " votes.");
+        } else {
+            System.out.println("No winner found. No votes were cast.");
         }
     }
-}
+        private Candidate getCandidateByID(String candidateId) {
+            for (Candidate candidate : candidateList) {
+                if (candidate.getCandidate_id().equals(candidateId)) {
+                    return candidate;
+                }
+            }
+            return null;
+        }
+            public void updateResult(String resultFilePath, String newResult) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(resultFilePath, true))) {
+                    writer.write(newResult);
+                    writer.newLine();
+                    System.out.println("Result updated successfully.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+//
+           public void viewResult(String resultFilePath) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(resultFilePath))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        System.out.println(line);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
